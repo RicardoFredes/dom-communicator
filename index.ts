@@ -1,1 +1,1 @@
-export * from "./src/communicator";
+export * from "./src/dom-communicator";

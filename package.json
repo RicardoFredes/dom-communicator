@@ -1,6 +1,6 @@
 {
   "name": "dom-communicator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "git@github.com:RicardoFredes/dom-communicator.git",

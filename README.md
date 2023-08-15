@@ -1,18 +1,18 @@
-# Communicator
+# DOM Communicator
 Esta lib usa o padrão Pub-Sub para registrar eventos Browser. O Communicator usa padrão singleton para instanciar um módulo de comunicação, em que é possível instanciar diferentes comunicadores a partir de chaves únicas.
 
 ## Como usar
 No exemplo abaixo, temos uma comunicação utilizando os métodos `subscribe`, `unsubscribe` e `publish`:
 
 ```ts
-import { Communicator } from "communicator";
+import DOMCommunicator from "dom-communicator";
 
 const isBrowser = typeof window !== "undefined";
 
 function main() {
   if (!isBrowser) return;
   
-  const communicator = Communicator.getInstance();
+  const communicator = DOMCommunicator.getInstance();
   
   const unsubscribeEventFoo = communicator.subscribe("foo", (data) => {
     console.log("foo", data);
@@ -36,7 +36,7 @@ Caso haja a necessidade de criar um comunicador em uma chave diferente, é poss�
 
 ```ts
 const PERSONAL_KEY = "__PERSONAL_KEY__";
-const personalCommunicator = Communicator.getInstance(PERSONAL_KEY);
+const personalCommunicator = DOMCommunicator.getInstance(PERSONAL_KEY);
 export default personalCommunicator;
 ```
 
@@ -47,7 +47,7 @@ Outra forma de fazer o `unsubscribe` é repassando a função de callback direta
 
 ```ts
 ...
-  const communicator = Communicator.getInstance();
+  const communicator = DOMCommunicator.getInstance();
 
   const callback = () => null;
 

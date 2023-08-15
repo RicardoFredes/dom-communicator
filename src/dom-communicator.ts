@@ -1,21 +1,21 @@
-type CommunicatorData =
+type DOMCommunicatorData =
   | string
   | boolean
   | number
   | null
   | undefined
   | Record<string, any>;
-type CommunicatorEvent = string;
-type CommunicatorCallback = (data?: CommunicatorData) => any;
-type CommunicatorSubscribers = Record<
-  CommunicatorEvent,
-  CommunicatorCallback[]
+type DOMCommunicatorEvent = string;
+type DOMCommunicatorCallback = (data?: DOMCommunicatorData) => any;
+type DOMCommunicatorSubscribers = Record<
+  DOMCommunicatorEvent,
+  DOMCommunicatorCallback[]
 >;
 
-class Communicator {
-  private subscribers: CommunicatorSubscribers = {};
+class DOMCommunicator {
+  private subscribers: DOMCommunicatorSubscribers = {};
 
-  static getInstance(key?: string): Communicator {
+  static getInstance(key?: string): DOMCommunicator {
     const k = key || "__COMMUNICATOR__";
     if (!key) console.warn(`[Communicator]: Empty key is replaced to "${k}"`);
     // @ts-ignore
@@ -24,21 +24,21 @@ class Communicator {
     return window[k] as Communicator;
   }
 
-  subscribe(event: CommunicatorEvent, fn: CommunicatorCallback) {
+  subscribe(event: DOMCommunicatorEvent, fn: DOMCommunicatorCallback) {
     const subs = this.subscribers[event];
     if (!Array.isArray(subs)) this.subscribers[event] = [];
     this.subscribers[event].push(fn);
     return () => this.unsubscribe(event, fn);
   }
 
-  unsubscribe(event: CommunicatorEvent, fn: CommunicatorCallback) {
+  unsubscribe(event: DOMCommunicatorEvent, fn: DOMCommunicatorCallback) {
     const subs = this.subscribers[event];
     if (!Array.isArray(subs)) return false;
     this.subscribers[event] = subs.filter((s) => s !== fn);
     return true;
   }
 
-  publish(event: CommunicatorEvent, data?: CommunicatorData) {
+  publish(event: DOMCommunicatorEvent, data?: DOMCommunicatorData) {
     const subs = this.subscribers[event];
     if (!Array.isArray(subs)) return false;
     subs.forEach((fn) => fn(data));
@@ -46,5 +46,5 @@ class Communicator {
   }
 }
 
-export default Communicator;
-export type { CommunicatorData, CommunicatorCallback };
+export default DOMCommunicator;
+export type { DOMCommunicatorData as CommunicatorData, DOMCommunicatorCallback as CommunicatorCallback };
