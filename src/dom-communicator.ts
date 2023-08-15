@@ -9,7 +9,7 @@ const getKeyName = (key?: string) => {
   const k = key || "__COMMUNICATOR__";
   if (!key) console.warn(`[Communicator]: Empty key is replaced to "${k}"`);
   return k;
-}
+};
 
 export class DOMCommunicator {
   private subscribers: DOMCommunicatorSubscribers = {};

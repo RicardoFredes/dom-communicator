@@ -1,6 +1,14 @@
 # DOM Communicator
 Esta lib usa o padrão Pub-Sub para registrar eventos Browser. O Communicator usa padrão singleton para instanciar um módulo de comunicação, em que é possível instanciar diferentes comunicadores a partir de chaves únicas.
 
+## Instalando
+
+- [dom-communicator](https://npmjs.com/package/dom-communicator)
+
+```bash
+yarn add dom-communicator
+```
+
 ## Como usar
 No exemplo abaixo, temos uma comunicação utilizando os métodos `subscribe`, `unsubscribe` e `publish`:
 
