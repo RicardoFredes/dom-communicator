@@ -19,7 +19,7 @@ class DOMCommunicator {
     const k = key || "__COMMUNICATOR__";
     if (!key) console.warn(`[Communicator]: Empty key is replaced to "${k}"`);
     // @ts-ignore
-    if (typeof window[k] === "undefined") window[k] = new Communicator();
+    if (typeof window[k] === "undefined") window[k] = new DOMCommunicator();
     // @ts-ignore
     return window[k] as Communicator;
   }
@@ -46,5 +46,6 @@ class DOMCommunicator {
   }
 }
 
+export { DOMCommunicator };
 export default DOMCommunicator;
-export type { DOMCommunicatorData as CommunicatorData, DOMCommunicatorCallback as CommunicatorCallback };
+export type { DOMCommunicatorData, DOMCommunicatorCallback };
