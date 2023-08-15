@@ -1,13 +1,15 @@
 {
-  "name": "communicator",
+  "name": "dom-communicator",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "git@github.com:RicardoFredes/communicator.git",
+  "repository": "git@github.com:RicardoFredes/dom-communicator.git",
   "author": "fredes <ricardofredes@gmail.com>",
+  "private": false,
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepublish": "npx build"
   },
   "devDependencies": {
     "typescript": "^5.1.6"
