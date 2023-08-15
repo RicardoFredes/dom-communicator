@@ -1,27 +1,40 @@
-type DOMCommunicatorData =
-  | string
-  | boolean
-  | number
-  | null
-  | undefined
-  | Record<string, any>;
-type DOMCommunicatorEvent = string;
-type DOMCommunicatorCallback = (data?: DOMCommunicatorData) => any;
-type DOMCommunicatorSubscribers = Record<
+import type {
+  DOMCommunicatorCallback,
+  DOMCommunicatorData,
   DOMCommunicatorEvent,
-  DOMCommunicatorCallback[]
->;
+  DOMCommunicatorSubscribers,
+} from "./dom-communicator.d";
 
-class DOMCommunicator {
+const getKeyName = (key?: string) => {
+  const k = key || "__COMMUNICATOR__";
+  if (!key) console.warn(`[Communicator]: Empty key is replaced to "${k}"`);
+  return k;
+}
+
+export class DOMCommunicator {
   private subscribers: DOMCommunicatorSubscribers = {};
+  key = "__COMMUNICATOR__";
 
   static getInstance(key?: string): DOMCommunicator {
-    const k = key || "__COMMUNICATOR__";
-    if (!key) console.warn(`[Communicator]: Empty key is replaced to "${k}"`);
+    const k = getKeyName(key);
     // @ts-ignore
     if (typeof window[k] === "undefined") window[k] = new DOMCommunicator();
     // @ts-ignore
+    window[k].key = k;
+    // @ts-ignore
     return window[k] as Communicator;
+  }
+
+  static delInstance(key?: string) {
+    const k = getKeyName(key);
+    // @ts-ignore
+    if (typeof window[k] !== "undefined") delete window[k];
+  }
+
+  destroy() {
+    const k = this.key;
+    // @ts-ignore
+    if (typeof window[k] !== "undefined") delete window[k];
   }
 
   subscribe(event: DOMCommunicatorEvent, fn: DOMCommunicatorCallback) {
@@ -45,7 +58,3 @@ class DOMCommunicator {
     return true;
   }
 }
-
-export { DOMCommunicator };
-export default DOMCommunicator;
-export type { DOMCommunicatorData, DOMCommunicatorCallback };

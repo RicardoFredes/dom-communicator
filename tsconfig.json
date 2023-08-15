@@ -13,6 +13,6 @@
     "declaration": true,
     "removeComments": true
   },
-  "include": ["src/", "index.ts"],
-  "exclude": ["node_modules/"]
+  "include": ["index.ts", "src/"],
+  "exclude": ["node_modules/", "src/**/*.spec.ts"]
 }

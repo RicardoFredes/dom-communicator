@@ -1,2 +1,2 @@
-export * from "./src/dom-communicator";
-export { default } from "./src/dom-communicator";
+export type * from "./src/dom-communicator.d";
+export { DOMCommunicator as default } from "./src/dom-communicator";
